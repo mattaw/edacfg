@@ -21,7 +21,7 @@ fi
 error_msg="edacfg.bash: ERROR"
 function error () {
   local indent=''
-  for ((i=2; i < ${#FUNCNAME[@]}; i++)); do
+  for ((i=1; i < ${#FUNCNAME[@]}; i++)); do
     indent+='  '
   done
   error_msg="${error_msg}\n${indent}${BASH_LINENO[0]} ${FUNCNAME[1]}: ${1}"
@@ -32,7 +32,7 @@ function error () {
 info_msg="edacfg.bash: INFO"
 function info () {
   local indent=''
-  for ((i=2; i < ${#FUNCNAME[@]}; i++)); do
+  for ((i=1; i < ${#FUNCNAME[@]}; i++)); do
     indent+='  '
   done
   info_msg="${info_msg}\n${indent}${BASH_LINENO[0]} ${FUNCNAME[1]}: ${1}"
@@ -187,13 +187,14 @@ else
   echo -e "${error_msg}"
   return 10
 fi
-
 process_settings_file $file
 
-if [ -s "$1" ]; then
-  process_tool_file "$1"
+file="${EDA_CFG_FILES}/${1}.${EDA_CFG_FILE_EXT}"
+echo $file
+if [ -s "${file}" ]; then
+  process_tool_file "${file}"
   if [ $? -ne 0 ]; then
-    error "Processing tool file \"$1\" failed."
+    error "Processing tool file \"$file\" failed."
     echo -e "${error_msg}"
     return 10
   fi
@@ -203,15 +204,17 @@ else
   return 10
 fi
 
-env > env_dump
 
 if [ "${EDA_CFG_DEBUG}" == "2" ]; then
   set +xv
   unset PS4
   echo -e "${info_msg}"
+  echo -e "${info_msg}" > edacfg.bash.info
+  env > edacfg.bash.env
 fi
 
 if [ "${EDA_CFG_DEBUG}" == "1" ]; then
   echo -e "${info_msg}"
+  echo -e "${info_msg}" > edacfg.bash.info
 fi
 
