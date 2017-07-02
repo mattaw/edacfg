@@ -1,0 +1,277 @@
+
+# insert settings to do only once here
+
+if (!($?EDACFG)) then
+  setenv EDACFG 1
+  set path=($path /package/eda/bin)
+  setenv ORIGPATH $PATH
+  if (-f /opt/ge/current/ecn/common/settings.csh) then
+    source /opt/ge/current/ecn/common/settings.csh
+  endif
+endif
+
+# return X if DISPLAY variable is of the form ##.#
+setenv EDACFGDISP `echo $DISPLAY | sed -e "s/:[0-9]*/X/g" | sed -e "s/\.[0-9]*//g"`
+#echo $EDACFGDISP
+
+# if user is logged into ecegrid-lnx (HST) via SunRay (i.e., not via REMOTEHOST) and
+# if the DISPLAY variable is of the form :##.#, then font path needs to be updated
+if ( (!($?REMOTEHOST)) && ( ${EDACFGDISP} == "X" ) &&  ( ${HOST} == "ecegrid-lnx.ecn.purdue.edu" )) then
+  # echo DISPLAY $DISPLAY
+  # echo HOST $HST
+  # echo User logged directly into Sun Ray
+  # if xset in expected location
+  if (-f /usr/bin/xset) then
+    set ans = ("`/usr/bin/xset -q | grep /usr/share/X11/fonts | grep misc | grep TTF | grep Type1 | grep unix`")
+    # if fonts not already in path
+    if ($#ans == 0) then
+      echo Updating font path for Sun Ray login
+      /usr/bin/xset +fp unix/:7100,/usr/share/X11/fonts/misc/,/usr/share/X11/fonts/TTF/,/usr/share/X11/fonts/Type1/
+    endif
+  endif
+else
+  # echo DISPLAY $DISPLAY
+  # echo HOST $HST
+  # if (($?REMOTEHOST)) then
+  #   echo REMOTEHOST $REMOTEHOST
+  # endif
+  # echo User not logged directly into Sun Ray
+endif
+
+if (-f /opt/ge/current/ecn/common/settings.csh) then
+  set ARCH=`/opt/ge/current/util/arch`
+else
+  set ARCH=`arch`
+endif
+
+if (!($?EDAPATH)) then
+  setenv EDAPATH
+endif
+
+##
+#
+# New edacfg code to support shell agnostic tool config file
+#
+##
+
+# Debug support
+if ( $?EDA_CFG_DEBUG ) then
+  if ("$EDA_CFG_DEBUG" == "2" ) then
+    set verbose
+    set echo
+  endif
+endif
+
+# Error support
+set error_msg = "edacfg: ERROR"
+alias error 'eval set error_msg = \"${error_msg}\\n \!*\"'
+
+# Info support
+set info_msg = "edacfg: INFO"
+alias info 'eval set info_msg = \"${info_msg}\\n \!*\"'
+
+# Find out where we are
+set rootdir = `/usr/bin/dirname $0`       # may be relative path
+set rootdir = `cd ${rootdir} && pwd`    # ensure absolute path
+set EDA_CFG_DIR = ${rootdir}
+
+# Find the edacfg_global_settings file and point file to it.
+if ( $?EDA_CFG_SETTINGS ) then
+  if (-f "$EDA_CFG_SETTINGS") then
+    set file "$EDA_CFG_SETTINGS"
+  else
+    error "EDA_CFG_SETTINGS was used to override the default"
+    error "  edacfg_global_settings file"
+    error "  but is set to a non-file target: ${EDA_CFG_SETTINGS}"
+    echo $error_msg
+    exit 10
+  endif
+else if (-f "${EDA_CFG_DIR}/edacfg_global_settings") then
+  set file = "${EDA_CFG_DIR}/edacfg_global_settings"
+else
+  error "No valid edacfg_global_settings file found in the script dir."
+  error "  EDA_CFG_DIR=${EDA_CFG_DIR}"
+  echo $error_msg
+  exit 10
+endif
+
+# Parse and load the global settings file
+foreach line ( "`cat $file`" )
+  set tokens = ($line)
+  switch ($tokens[1])
+    case \#*:
+      breaksw
+    case ENV:
+      set var = `eval echo $tokens[2]`
+      set val = `eval echo $tokens[3]`
+      setenv $var $val
+      info "ENV: setenv $var $val"
+      breaksw
+    case UMASK:
+      umask $tokens[2]
+      info "UMASK: umask $tokens[2]"
+      breaksw
+    default:
+      error "File ${file}."
+      error "Unknown token ${tokens[1]}."
+      exit 10
+      breaksw
+  endsw
+end
+
+foreach tool ($*)
+
+set file = "${EDA_CFG_FILES}/$tool.${EDA_CFG_FILE_EXT}"
+if (-f $file) then
+  info "Found ${EDA_CFG_FILE_EXT} file:"
+  info "${EDA_CFG_FILES}/${tool}.${EDA_CFG_FILE_EXT}"
+
+  # Parse and load the tool file
+  #
+  # First run check the name doesn't already exist
+  foreach line ( "`cat $file`" )
+    set tokens = ($line)
+    switch ($tokens[1])
+      case NAME:
+        if ($?EDA_CFG_ACTIVE_TOOLS == 1) then
+          if ("$EDA_CFG_ACTIVE_TOOLS" !~  *"$tokens[2]"*) then
+            setenv EDA_CFG_ACTIVE_TOOLS ${EDA_CFG_ACTIVE_TOOLS}:$tokens[2]
+          else
+            error "File $file."
+            error "Only one tool of name \"${tokens[1]}\" allowed to be active at a time."
+            echo $error_msg
+            exit 10
+          endif
+        else # create path if doesn't exist
+          setenv EDA_CFG_ACTIVE_TOOLS $tokens[2]
+        endif
+        info "NAME: $tokens[2]"
+        breaksw
+    endsw
+  end
+
+  # Second run actually process the file
+  foreach line ( "`cat $file`" )
+    set tokens = ($line)
+    switch ($tokens[1])
+      case \#*:
+        info "#: Found a comment!"
+        breaksw
+      case ENV:
+        set var = `eval echo $tokens[2]`
+        set val = `eval echo $tokens[3]`
+        setenv $var $val
+        info "ENV: setenv $var $val"
+        breaksw
+      case VERSION:
+        eval set ver = $tokens[2]
+        info "VERSION: $ver"
+        breaksw
+      case APPENDIF:
+        set var = $tokens[2]
+        set appendee = `eval echo $tokens[3]`
+        if ( `eval echo \$\?$var` ) then
+          set val = `eval echo \$$var`
+          if ("$val" !~  *"$appendee"*) then
+            eval setenv $var "${val}:${appendee}"
+          endif
+        else # create path if doesn't exist
+          eval setenv $var $appendee
+        endif
+        info "APPENDIF: added $var $appendee"
+        breaksw
+      case PREPENDIF:
+        set var = $tokens[2]
+        set prependee = `eval echo $tokens[3]`
+        if ( `eval echo \$\?$var` ) then
+          set val = `eval echo \$$var`
+          if ("$val" !~  *"$prependee"*) then
+            eval setenv $var "${prependee}:${val}"
+          endif
+        else # create path if doesn't exist
+          eval setenv $var $prependee
+        endif
+        info "PREPENDIF: added $var $prependee"
+        breaksw
+      case NAME:
+        breaksw
+      default:
+        error "File ${file}."
+        error "Unknown token ${tokens[1]}."
+        exit 10
+        breaksw
+    endsw
+  end
+
+else
+
+if ( ${ARCH} == "sol-sparc64" || ${ARCH} == "sun4" ) then
+  if (-f /package/eda/setup/sparc/${tool}.csh) then
+    #echo Loading environment settings for package ${tool}
+    source /package/eda/setup/sparc/${tool}.csh
+  else
+    if ($?TERM) then
+      echo Note: ${tool} is not installed for the Sun platform.
+    endif
+  endif
+else if ( ${ARCH} == "lx24-x86" || ${ARCH} == "x86_64" || ${ARCH} == "i686" || ${ARCH} == "i386" ) then
+  if (-f /package/eda/setup/linux/${tool}.csh) then
+    #echo Loading environment settings for package ${tool}
+    source /package/eda/setup/linux/${tool}.csh
+  else
+    if ($?TERM) then
+      echo Note: ${tool} is not installed for the Linux platform.
+    endif
+  endif
+else
+echo "ERROR. Unknown Architecture ${ARCH}. Unable to load configuration for ${tool}"
+endif
+
+endif #End of test for new config file.
+
+end
+
+# else host is ecegrid-lnx. disables software configuration except for aliases defined in the config file
+if ((${HOST} == "ecegrid-lnx.ecn.purdue.edu") ) then
+  if ($?TERM) then
+    echo On ecegrid-lnx you must use grid command to run design software.
+  endif
+
+  unsetenv EDAPATH
+  set path=($ORIGPATH)
+
+endif
+
+if ( ${ARCH} == "sol-sparc64" || ${ARCH} == "sun4" ) then
+    set path=($path /usr/X/bin)
+else if ( ${ARCH} == "lx24-x86" || ${ARCH} == "x86_64" || ${ARCH} == "i686" || ${ARCH} == "i386" ) then
+    # make sure path to xset command is in path
+    source /package/eda/setup/edapath.csh /usr/bin
+    source /package/eda/setup/edapath.csh /usr/X11R6/bin
+endif
+
+# belongs in icflow*.csh but then it doesn't get defined on ecegrid-lnx because
+# icflow setup file is bypassed
+alias mgfonts 'xset fp+ tcp/ecegrid-lnx.ecn.purdue.edu:7103'
+
+#if ( ${ARCH} == "lx24-x86" || ${ARCH} == "x86_64" ) then
+#  alias acroread xpdf
+#endif
+#
+# Debugging output and cleanup.
+
+if ( $?EDA_CFG_DEBUG ) then
+  if ("$EDA_CFG_DEBUG" == "1" ) then
+    echo $info_msg
+    env > edacfg.env
+  endif
+endif
+
+if ( $?EDA_CFG_DEBUG ) then
+  if ("$EDA_CFG_DEBUG" == "2" ) then
+    echo $info_msg
+    env > edacfg.env
+    unset verbose
+    unset echo
+  endif
+endif
