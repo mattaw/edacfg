@@ -178,9 +178,7 @@ if [ -n "${EDA_CFG_SETTINGS}" ]; then
     echo -e "${error_msg}"
     return 10
   fi
-fi
-
-if [ -f "${EDA_CFG_DIR}/edacfg_global_settings" ]; then
+elif [ -f "${EDA_CFG_DIR}/edacfg_global_settings" ]; then
   file="${EDA_CFG_DIR}/edacfg_global_settings"
 else
   error "No valid edacfg_global_settings file found in the script dir."
@@ -190,21 +188,27 @@ else
 fi
 process_settings_file $file
 
-file="${EDA_CFG_FILES}/${1}.${EDA_CFG_FILE_EXT}"
-if [ -s "${file}" ]; then
-  process_tool_file "${file}"
-  if [ $? -ne 0 ]; then
-    error "Processing tool file \"$file\" failed."
+# Loop over tools passed as arguments
+for tool in "$@"; do
+  file="${EDA_CFG_FILES}/${tool}.${EDA_CFG_FILE_EXT}"
+  echo $file
+  if [ -s "${file}" ]; then
+    process_tool_file "${file}"
+    if [ $? -ne 0 ]; then
+      error "Processing tool file \"$file\" failed."
+      echo -e "${error_msg}"
+      echo -e "${info_msg}"
+      return 10
+    fi
+  else
+    error "Usage: source edacfg.bash eda_tool"
     echo -e "${error_msg}"
+    echo -e "${info_msg}"
     return 10
   fi
-else
-  error "Usage: source edacfg.bash eda_tool"
-  echo -e "${error_msg}"
-  return 10
-fi
+done
 
-
+# Cleanup, unset debug nastiness and capture information
 if [ "${EDA_CFG_DEBUG}" == "2" ]; then
   set +xv
   unset PS4

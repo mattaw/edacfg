@@ -1,0 +1,8 @@
+# Cadence RTL Compiler 14.2
+# Online documentation command: rcdoc
+NAME RC142
+ENV CDS_RC ${EDA_CFG_ROOT}/cadence/RC142
+ENV CDS_INIT_DIR ${CDS_RC}
+APPENDIF PATH ${CDS_RC}/tools/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ENV CDS_AUTO_64BIT ALL
