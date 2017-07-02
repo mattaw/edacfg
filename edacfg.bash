@@ -172,17 +172,18 @@ if [ -n "${EDA_CFG_SETTINGS}" ]; then
   if [ -s "${EDA_CFG_SETTINGS}" ]; then
     file="${EDA_CFG_SETTINGS}"
   else
-    error "\$EDA_CFG_SETTINGS was used to override the default global_settings file"
+    error "\$EDA_CFG_SETTINGS was used to override the default"
+    error "  edacfg_global_settings file"
     error "  but is set to a non-file target: ${EDA_CFG_SETTINGS}"
     echo -e "${error_msg}"
     return 10
   fi
 fi
 
-if [ -f "${EDA_CFG_DIR}/global_settings" ]; then
-  file="${EDA_CFG_DIR}/global_settings"
+if [ -f "${EDA_CFG_DIR}/edacfg_global_settings" ]; then
+  file="${EDA_CFG_DIR}/edacfg_global_settings"
 else
-  error "No valid global_settings file found in the script dir \$EDA_CFG_DIR"
+  error "No valid edacfg_global_settings file found in the script dir."
   error "  \$EDA_CFG_DIR=${EDA_CFG_DIR}"
   echo -e "${error_msg}"
   return 10
@@ -190,7 +191,6 @@ fi
 process_settings_file $file
 
 file="${EDA_CFG_FILES}/${1}.${EDA_CFG_FILE_EXT}"
-echo $file
 if [ -s "${file}" ]; then
   process_tool_file "${file}"
   if [ $? -ne 0 ]; then
