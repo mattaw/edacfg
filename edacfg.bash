@@ -101,7 +101,6 @@ function process_tool_file () {
         if [[ ":${EDA_CFG_ACTIVE_TOOLS}:" != *":${tokens[1]}:"* ]]; then
           name=${tokens[1]}
 	else
-        #if [ $? -eq 1 ]; then
           info "File \"${1}\"."
           info "Tool of name \"${tokens[1]}\" is already active."
           return 0
@@ -128,18 +127,18 @@ function process_tool_file () {
       \#*)
         info "#: Found a comment!"
         ;;
-      ENV)
-        eval env="${tokens[2]}"
-        export ${tokens[1]}="$env"
-        info "ENV: exported ${tokens[1]}=$env"
+      NAME)
         ;;
       VERSION)
-        ver="${tokens[1]}"
-        info "VERSION: $desc"
         ;;
       DESC)
         desc="${tokens[@]:1}"
         info "INFO: $desc"
+        ;;
+      ENV)
+        eval env="${tokens[2]}"
+        export ${tokens[1]}="$env"
+        info "ENV: exported ${tokens[1]}=$env"
         ;;
       APPENDIF)
         eval var="${tokens[2]}"
@@ -156,8 +155,6 @@ function process_tool_file () {
         if [ $? -eq 1 ]; then
           info "  \"${var}\" already in ${tokens[1]}."
         fi
-        ;;
-      NAME)
         ;;
       *)
         error "File \"${1}\"."
