@@ -98,17 +98,25 @@ function process_tool_file () {
     read -r -a tokens <<< "${line}"
     case "${tokens[0]}" in
       NAME)
-        appendif EDA_CFG_ACTIVE_TOOLS "${tokens[1]}"
-        if [ $? -eq 1 ]; then
-          error "File \"${1}\"."
-          error "Only one tool of name \"${tokens[1]}\" allowed to be active at a time."
-          return 20
+        if [[ ":${EDA_CFG_ACTIVE_TOOLS}:" != *":${tokens[1]}:"* ]]; then
+          name=${tokens[1]}
+	else
+        #if [ $? -eq 1 ]; then
+          info "File \"${1}\"."
+          info "Tool of name \"${tokens[1]}\" is already active."
+          return 0
         fi
         name="${tokens[1]}"
         info "NAME: ${tokens[1]}"
         ;;
+      VERSION)
+        ver="${tokens[1]}"
+        info "VERSION: $ver"
+        ;;
     esac
   done <"${1}"
+
+  desc="Setting up environment for $name $ver"
 
   # Second run process tokens
   info "Processing File \"${1}\"."
@@ -126,8 +134,12 @@ function process_tool_file () {
         info "ENV: exported ${tokens[1]}=$env"
         ;;
       VERSION)
-        eval ver="${tokens[1]}"
-        info "VERSION: $ver"
+        ver="${tokens[1]}"
+        info "VERSION: $desc"
+        ;;
+      DESC)
+        desc="${tokens[@]:1}"
+        info "INFO: $desc"
         ;;
       APPENDIF)
         eval var="${tokens[2]}"
@@ -154,6 +166,9 @@ function process_tool_file () {
         ;;
     esac
   done <"${1}"
+  # Only append the tool name if everything else worked.
+  appendif EDA_CFG_ACTIVE_TOOLS "$name"
+  echo "$desc"
 
   return 0
 }
@@ -191,7 +206,6 @@ process_settings_file $file
 # Loop over tools passed as arguments
 for tool in "$@"; do
   file="${EDA_CFG_FILES}/${tool}.${EDA_CFG_FILE_EXT}"
-  echo $file
   if [ -s "${file}" ]; then
     process_tool_file "${file}"
     if [ $? -ne 0 ]; then

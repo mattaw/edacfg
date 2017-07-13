@@ -1,6 +1,7 @@
 # Tool config file for Mentor Graphics Questasim and Modelsim 10.3b
 NAME msim
 VERSION 10.3b
+DESC Mentor Graphics Modelsim/Questa 10.3b
 ENV TOOLSET questav10.3b
 APPENDIF MGLS_LICENSE_FILE 1719@marina.ecn.purdue.edu
 ENV MTI ${EDA_CFG_ROOT}/mg/questa10.3b/questasim

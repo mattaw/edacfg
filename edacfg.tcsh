@@ -4,6 +4,12 @@
 #
 ##
 
+if ( `/usr/bin/id -u` == "0" ) then
+  echo "edacfg.tcsh: ERROR"
+  echo "  Please don't run as root. This script has tons of arbitrary code execution paths in it due to eval's"
+  exit 10000
+endif
+
 # Debug support
 if ( $?EDA_CFG_DEBUG ) then
   if ("$EDA_CFG_DEBUG" == "2" ) then
@@ -21,9 +27,16 @@ set info_msg = "edacfg: INFO"
 alias info 'eval set info_msg = \"${info_msg}\\n \!*\"'
 
 # Find out where we are
-set rootdir = `/usr/bin/dirname $0`       # may be relative path
-set rootdir = `cd ${rootdir} && pwd`    # ensure absolute path
-set EDA_CFG_DIR = ${rootdir}
+set called=($_)
+if ( "$called" != "" ) then
+  set script=`/bin/readlink -f $called[2]`
+  set rootdir=`/usr/bin/dirname $script`
+  set EDA_CFG_DIR = ${rootdir}
+else
+  echo "edacfg.tcsh: ERROR"
+  echo " Please source this script, do not execute it directly." 
+  exit 10000
+endif
 
 # Find the edacfg_global_settings file and point file to it.
 if ( $?EDA_CFG_SETTINGS ) then
@@ -85,20 +98,26 @@ if (-f $file) then
       case NAME:
         if ($?EDA_CFG_ACTIVE_TOOLS == 1) then
           if ("$EDA_CFG_ACTIVE_TOOLS" !~  *"$tokens[2]"*) then
-            setenv EDA_CFG_ACTIVE_TOOLS ${EDA_CFG_ACTIVE_TOOLS}:$tokens[2]
+            set name=$tokens[2]
           else
-            error "File $file."
-            error "Only one tool of name \"${tokens[1]}\" allowed to be active at a time."
-            echo $error_msg
-            exit 10
+            info "File $file."
+            info "Tool of name ${tokens[2]} is already active."
+            goto SKIP
           endif
         else # create path if doesn't exist
-          setenv EDA_CFG_ACTIVE_TOOLS $tokens[2]
+          #setenv EDA_CFG_ACTIVE_TOOLS $tokens[2]
+          set name=$tokens[2]
         endif
         info "NAME: $tokens[2]"
         breaksw
+      case VERSION:
+        eval set ver = $tokens[2]
+        info "VERSION: $ver"
+        breaksw
     endsw
   end
+
+  desc="Setting up environment for $name $ver"
 
   # Second run actually process the file
   foreach line ( "`cat $file`" )
@@ -113,9 +132,9 @@ if (-f $file) then
         setenv $var $val
         info "ENV: setenv $var $val"
         breaksw
-      case VERSION:
-        eval set ver = $tokens[2]
-        info "VERSION: $ver"
+      case DESC:
+	set desc = ($line)
+        shift desc
         breaksw
       case APPENDIF:
         set var = $tokens[2]
@@ -145,15 +164,39 @@ if (-f $file) then
         breaksw
       case NAME:
         breaksw
+      case VERSION:
+        breaksw
       default:
         error "File ${file}."
         error "Unknown token ${tokens[1]}."
+	echo "$error_msg"
         exit 10
         breaksw
     endsw
   end
+  # Only append the tool name if everything else worked.
+  if ($?EDA_CFG_ACTIVE_TOOLS == 0) then
+    setenv EDA_CFG_ACTIVE_TOOLS "$name"
+  else
+    setenv EDA_CFG_ACTIVE_TOOLS ${EDA_CFG_ACTIVE_TOOLS}:$name
+  endif
+  echo "$desc"
+  SKIP:  #Break from above if tool is already defined. icky!
 
 else
   source ${EDA_CFG_ROOT}/setup/edacfg $tool
+endif
+
+end
+
+# Debug support
+
+if ( $?EDA_CFG_DEBUG ) then
+  echo "$info_msg"
+  if ("$EDA_CFG_DEBUG" == "2" ) then
+    echo "$error_msg"
+    unset verbose
+    unset echo
+  endif
 endif
 
