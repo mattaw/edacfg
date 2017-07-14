@@ -4,6 +4,7 @@
 #    thoughts - improve the error printout to put info and errors onto stderr.
 #               also when we error out it would be good to capture info_msg and error_msg
 
+# Startup things
 if [[ $EUID -eq 0 ]]; then
   echo "edacfg.bash: ERROR"
   echo "  Please don't run as root. This script has tons of arbitrary code execution paths in it due to eval's"
@@ -16,6 +17,10 @@ if [ "${EDA_CFG_DEBUG}" == "2" ]; then
   set -xv
   PS4='$LINENO: '
 fi
+
+#
+# Functions
+#
 
 # Variables and function for pretty printing errors.
 error_msg="edacfg.bash: ERROR"
@@ -37,6 +42,11 @@ function info () {
   done
   info_msg="${info_msg}\n${indent}${BASH_LINENO[0]} ${FUNCNAME[1]}: ${1}"
   return 0
+}
+
+function print_msgs () {
+  echo -e "$info_msg"
+  echo -e "$error_msg"
 }
 
 # Function appendif & prependif var string
@@ -156,6 +166,12 @@ function process_tool_file () {
           info "  \"${var}\" already in ${tokens[1]}."
         fi
         ;;
+      ALIAS)
+	new_alias="function ${tokens[1]} { ${tokens[@]:2}; }"
+	eval "$new_alias"
+        info "ALIAS: $new_alias"
+	export -f "${tokens[1]}"
+        ;;
       *)
         error "File \"${1}\"."
         error "Unknown token \"${tokens[0]}\"."
@@ -187,7 +203,7 @@ if [ -n "${EDA_CFG_SETTINGS}" ]; then
     error "\$EDA_CFG_SETTINGS was used to override the default"
     error "  edacfg_global_settings file"
     error "  but is set to a non-file target: ${EDA_CFG_SETTINGS}"
-    echo -e "${error_msg}"
+    print_msgs
     return 10
   fi
 elif [ -f "${EDA_CFG_DIR}/edacfg_global_settings" ]; then
@@ -195,7 +211,7 @@ elif [ -f "${EDA_CFG_DIR}/edacfg_global_settings" ]; then
 else
   error "No valid edacfg_global_settings file found in the script dir."
   error "  \$EDA_CFG_DIR=${EDA_CFG_DIR}"
-  echo -e "${error_msg}"
+  print_msgs
   return 10
 fi
 process_settings_file $file
@@ -207,14 +223,12 @@ for tool in "$@"; do
     process_tool_file "${file}"
     if [ $? -ne 0 ]; then
       error "Processing tool file \"$file\" failed."
-      echo -e "${error_msg}"
-      echo -e "${info_msg}"
+      print_msgs
       return 10
     fi
   else
     error "Usage: source edacfg.bash eda_tool"
-    echo -e "${error_msg}"
-    echo -e "${info_msg}"
+    print_msgs
     return 10
   fi
 done
