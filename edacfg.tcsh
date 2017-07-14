@@ -118,7 +118,11 @@ foreach tool ($*)
       endsw
     end
   
-    desc="Setting up environment for $name $ver"
+    if ($?ver == 1) then
+      desc="Setting up environment for $name $ver"
+    else
+      desc="Setting up environment for $name"
+    endif
   
     # Second run actually process the file
     foreach line ( "`cat $file`" )
@@ -134,7 +138,7 @@ foreach tool ($*)
           info "ENV: setenv $var $val"
           breaksw
         case DESC:
-  	set desc = ($line)
+  	  set desc = ($line)
           shift desc
           breaksw
         case APPENDIF:
@@ -162,6 +166,15 @@ foreach tool ($*)
             eval setenv $var $prependee
           endif
           info "PREPENDIF: added $var $prependee"
+          breaksw
+        case ALIAS:
+          set new_alias = ($line)
+          shift new_alias
+          set new_alias_name = $new_alias[1]
+          shift new_alias
+          set new_alias_body = ($new_alias)
+          eval alias $new_alias_name "$new_alias_body"
+          info "ALIAS: added $new_alias_name $new_alias_body"
           breaksw
         case NAME:
           breaksw
