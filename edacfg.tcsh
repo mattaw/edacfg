@@ -119,9 +119,9 @@ foreach tool ($*)
     end
   
     if ($?ver == 1) then
-      desc="Setting up environment for $name $ver"
+      set desc = "Setting up environment for $name $ver"
     else
-      desc="Setting up environment for $name"
+      set desc = "Setting up environment for $name"
     endif
   
     # Second run actually process the file
@@ -138,7 +138,7 @@ foreach tool ($*)
           info "ENV: setenv $var $val"
           breaksw
         case DESC:
-  	  set desc = ($line)
+          set desc = ($line)
           shift desc
           breaksw
         case APPENDIF:
