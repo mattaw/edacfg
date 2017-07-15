@@ -1,0 +1,14 @@
+# Altera Quartus and NIOS II kit version 15.0
+# Quartus documentation in quartus helpmenu, niosdoc for NIOS documents
+NAME ALTERA
+VERSION 15.0
+DESC Altera Quartus and NIOS II kit version 15.0
+ENV QUARTUS_ROOTDIR ${EDA_CFG_ROOT}/altera/altera15.0/quartus
+ENV NIOS_ROOTDIR ${EDA_CFG_ROOT}/altera/altera15.0/nios2eds
+ENV SOPC_KIT_NIOS2 ${NIOS_ROOTDIR}
+APPENDIF LM_LICENSE_FILE 1721@marina.ecn.purdue.edu
+ENV MWFONT_CACHE_DIR /tmp
+APPENDIF PATH ${QUARTUS_ROOTDIR}/bin
+APPENDIF PATH ${QUARTUS_ROOTDIR}/sopc_builder/bin
+APPENDIF PATH ${NIOS_ROOTDIR}/bin
+ALIAS niosdoc firefox "file:${NIOS_ROOTDIR}/documents/index.htm"

@@ -1,0 +1,14 @@
+# Cadence GENUS RTL Compiler 16.2
+# Online documentation command: genusdoc
+NAME GENUS
+VERSION 16.2
+DESC Cadence GENUS RTL Compiler 16.2
+ENV EDA_CFG_CDS_GENUS ${EDA_CFG_ROOT}/cadence/GENUS162
+ENV CDS_INIT_DIR ${EDA_CFG_CDS_GENUS}
+APPENDIF PATH ${EDA_CFG_CDS_GENUS}/tools/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ENV CDS_AUTO_64BIT ALL
+ALIAS genusdoc cdnshelp -hierarchy ${EDA_CFG_CDS_GENUS}/doc/xmlreg/library.lbr
+APPENDIF MANPATH ${EDA_CFG_CDS_GENUS}/share/synth/man_common
+APPENDIF MANPATH ${EDA_CFG_CDS_GENUS}/share/innovus/man
+APPENDIF MANPATH ${EDA_CFG_CDS_GENUS}/share/commonui/man
