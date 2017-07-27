@@ -55,21 +55,21 @@ if ( "$script" == "edastart.tcsh" ) then
   exit 10000
 endif
 
-# Find the edacfg_global_settings file and point file to it.
+# Find the edastart_global_settings file and point file to it.
 if ( $?EDA_CFG_SETTINGS ) then
   if (-f "$EDA_CFG_SETTINGS") then
     set file "$EDA_CFG_SETTINGS"
   else
     error "EDA_CFG_SETTINGS was used to override the default"
-    error "  edacfg_global_settings file"
+    error "  edastart_global_settings file"
     error "  but is set to a non-file target: ${EDA_CFG_SETTINGS}"
     echo $error_msg
     exit 10
   endif
-else if (-f "${EDA_CFG_DIR}/edacfg_global_settings") then
-  set file = "${EDA_CFG_DIR}/edacfg_global_settings"
+else if (-f "${EDA_CFG_DIR}/edastart_global_settings") then
+  set file = "${EDA_CFG_DIR}/edastart_global_settings"
 else
-  error "No valid edacfg_global_settings file found in the script dir."
+  error "No valid edastart_global_settings file found in the script dir."
   error "  EDA_CFG_DIR=${EDA_CFG_DIR}"
   echo $error_msg
   exit 10
