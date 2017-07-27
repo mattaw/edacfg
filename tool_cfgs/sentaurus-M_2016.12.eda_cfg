@@ -1,0 +1,8 @@
+# Tool config file for Synopsys Sentaurus 2016.12
+NAME msim
+VERSION M-2016.12-SP2
+DESC Synopsys Sentaurus
+ENV TOOLSET sentaurus-M_2016.12-SP2_
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV STROOT ${EDA_CFG_ROOT}/synopsys/sentaurus-M_2016.12-SP2
+APPENDIF PATH ${STROOT}/bin

@@ -1,0 +1,9 @@
+# Cadence Incisiv simulator
+# Online documentation command: incisivdoc
+NAME incisiv
+ENV CDS_INCISIV ${EDA_CFG_ROOT}cadence/INCISIVE152
+ENV CDS_INIT_DIR ${CDS_INCISIV}
+APPENDIF PATH ${CDS_INCISIV}/tools/bin
+APPENDIF PATH ${CDS_INCISIV}/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ALIAS incisivdoc cdnshelp -hierarchy ${CDS_INCISIV}/bin/cdnshelp -hierarchy $CDS_INCISIV/doc

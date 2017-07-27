@@ -1,0 +1,11 @@
+# Tool config file for Mentor Graphics Calibre 2017.2_28.22
+# For documentation, type caldoc
+NAME calibre
+VERSION 2017.2_28.22
+DESC Mentor Graphics Calibre
+ENV TOOLSET cal2017.2_28.22
+APPENDIF MGLS_LICENSE_FILE 1719@marina.ecn.purdue.edu
+ENV MGC_HOME ${EDA_CFG_ROOT}/mg/cal2017.2_28.22/aoi_cal_2017.2_28.22
+ENV MGC_TMPDIR /usr/tmp
+APPENDIF PATH ${MGC_HOME}/bin
+ALIAS caldoc firefox file:///${MGC_HOME}/docs/infohubs/index.html

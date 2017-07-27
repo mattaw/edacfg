@@ -1,0 +1,10 @@
+# Tool config file for Mentor Graphics Pyxis
+# For documentation, type pydocs
+NAME pyxis
+VERSION 17.1
+DESC Mentor Graphics Pyxis
+ENV TOOLSET pyxis17.1
+APPENDIF MGLS_LICENSE_FILE 1719@marina.ecn.purdue.edu
+ENV MGC_HOME ${EDA_CFG_ROOT}/mg/pyxis17.1/Pyxis_v17.1_rhel6or7
+APPENDIF PATH ${MGC_HOME}/bin
+ALIAS pydocs firefox ${MGC_HOME}/docs/index.html

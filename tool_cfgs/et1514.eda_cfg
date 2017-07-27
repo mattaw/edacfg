@@ -1,0 +1,10 @@
+# Cadence Encounter Timing System
+# Online documentation command: etdoc
+NAME et
+ENV CDS_ET ${EDA_CFG_ROOT}cadence/ET1514
+ENV CDS_INIT_DIR ${CDS_ET}
+APPENDIF PATH ${CDS_ET}/tools/bin
+APPENDIF PATH ${CDS_ET}/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ENV CDS_AUTO_64BIT ALL
+ALIAS etdoc ${CDS_ET}/bin/cdnshelp
