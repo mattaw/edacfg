@@ -1,3 +1,5 @@
+#!/bin/tcsh
+
 ##
 #
 # New edastart code to support shell agnostic tool config file
@@ -10,9 +12,6 @@ if ( `/usr/bin/id -u` == "0" ) then
   echo "  Please don't run as root. This script has tons of arbitrary code execution paths in it due to eval's"
   exit 10000
 endif
-
-# Set marker to know that edastart.tcsh was called.
-set edastart = "True"
 
 # Debug support
 if ( $?EDA_CFG_DEBUG ) then
@@ -30,22 +29,24 @@ alias error 'eval set error_msg = \"${error_msg}\\n  \!*\"'
 set info_msg = "edacfg: INFO"
 alias info 'eval set info_msg = \"${info_msg}\\n  \!*\"'
 
-# Find out where we are
+# Find out where we are and if we were sourced or run
 set called=($_)
 if ( "$called" != "" ) then
   set invoc="$called[2]"
   set script="${invoc:t}"
-  set rootdir="${invoc:h}"
-  set EDA_CFG_DIR = ${rootdir}
+  set rootdir=`readlink -f "${invoc}"`
+  set rootdir="${rootdir:h}"
+  set edastart = "sourced"
 else
-  echo "edastart.tcsh: ERROR"
-  echo " Please source this script, do not execute it directly." 
-  exit 10000
+  set script="${0:t}"
+  set rootdir=`readlink -f "${0}"`
+  set rootdir="${rootdir:h}"
+  set edastart = "executed"
 endif
+set EDA_CFG_DIR = ${rootdir}
 
-echo "$invoc"
-echo "${invoc:t}"
-echo "${invoc:h}"
+info " script  ${script}"
+info " rootdir ${rootdir}"
 
 # We should not be sourced or called directly
 if ( "$script" == "edastart.tcsh" ) then
@@ -99,5 +100,17 @@ foreach line ( "`cat $file`" )
   endsw
 end
 
+# Pull in the actual script to run from here
 source "${rootdir}/eda_${script}" $*
+
+# Debug support
+
+if ( $?EDA_CFG_DEBUG ) then
+  echo "$info_msg"
+  if ("$EDA_CFG_DEBUG" == "2" ) then
+    echo "$error_msg"
+    unset verbose
+    unset echo
+  endif
+endif
 

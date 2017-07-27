@@ -10,6 +10,11 @@ if ( ! $?edastart ) then
   echo " Please source this script using edastart.tcsh, don't use it directly." 
   exit 10000
 endif
+if ( "$edastart" != "sourced" ) then
+  echo "edacfg.tcsh: ERROR"
+  echo " Please source this script, don't execute it." 
+  exit 10000
+endif
 
 foreach tool ($*)
 
@@ -130,15 +135,4 @@ foreach tool ($*)
   endif
   
 end
-
-# Debug support
-
-if ( $?EDA_CFG_DEBUG ) then
-  echo "$info_msg"
-  if ("$EDA_CFG_DEBUG" == "2" ) then
-    echo "$error_msg"
-    unset verbose
-    unset echo
-  endif
-endif
 
