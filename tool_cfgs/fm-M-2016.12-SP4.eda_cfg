@@ -1,0 +1,9 @@
+# Tool config file for Synopsys Formality 2016.12
+NAME formality
+VERSION M-2016.12-SP4
+DESC Synopsys Formality
+ENV TOOLSET formality-M_2016.12-SP4_
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV FMROOT ${EDA_CFG_ROOT}/synopsys/fm-M-2016.12-SP4
+APPENDIF PATH ${FMROOT}/bin
+ALIAS fmdocs firefox ${FMROOT}/doc/fm/pdf/

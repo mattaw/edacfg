@@ -1,0 +1,10 @@
+# Synopsys Milky Way
+# Documentation: mwdocs <cr>
+NAME milkyway
+VERSION M-2016.12-SP4
+DESC Synopsys Milky Way
+ENV SYNOPSYS_MW ${EDA_CFG_ROOT}/synopsys/mw-M-2016.12-SP4
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+APPENDIF PATH ${SYNOPSYS_MW}/bin/AMD.64
+APPENDIF MANPATH ${SYNOPSYS_MW}/doc/mwm/man
+ALIAS mwdocs firefox ${SYNOPSYS_MW}/doc/pdf

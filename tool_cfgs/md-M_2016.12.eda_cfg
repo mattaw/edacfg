@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Medici M_2016.12
+# Documentation: type mddoc <cr>
+NAME Medici
+VERSION M-2016.12
+DESC Synopsys Medici
+ENV TOOLSET md-M_2016.12
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV MEDICI ${EDA_CFG_ROOT}/synopsys/md-M_2016.12
+APPENDIF PATH ${MEDICI}/bin
+ALIAS mddoc firefox ${MEDICI}/taurus-medici_2016.12.0/manual_pdf

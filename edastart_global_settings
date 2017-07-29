@@ -1,5 +1,5 @@
 # This file contains the global paths for edacfg.
-ENV EDA_CFG_ROOT /package/eda/
+ENV EDA_CFG_ROOT /package/eda
 ENV EDA_CFG_FILE_EXT "eda_cfg"
 ENV EDA_CFG_FILES ${EDA_CFG_ROOT}/setup/tool_cfgs
 UMASK 077

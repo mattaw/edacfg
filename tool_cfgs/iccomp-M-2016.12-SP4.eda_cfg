@@ -1,0 +1,13 @@
+# Synopsys Design Compiler RTL Synthesis
+# Documentation: iccdoc <cr>
+NAME SYNOPSYS_ICC
+VERSION M-2016.12-SP4
+DESC Synopsys IC Compiler
+ENV SYNOPSYS_ICC ${EDA_CFG_ROOT}/synopsys/icc-M-2016.12-SP4
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+APPENDIF PATH ${SYNOPSYS_ICC}/bin
+APPENDIF MANPATH ${SYNOPSYS_ICC}/doc/icc/man
+APPENDIF MANPATH ${SYNOPSYS_ICC}/doc/snps_gui/man
+APPENDIF MANPATH ${SYNOPSYS_ICC}/doc/snps_tcl/man
+APPENDIF MANPATH ${SYNOPSYS_ICC}/doc/syn/man
+ALIAS iccdoc firefox ${SYNOPSYS_ICC}/doc/icc/html/gaoh/index.html

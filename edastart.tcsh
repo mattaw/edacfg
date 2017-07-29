@@ -6,6 +6,7 @@
 # Then sources actual command
 #
 ##
+# Copyright Mark Johnson and Matthew Swabey matthew@swabey.org.
 
 if ( `/usr/bin/id -u` == "0" ) then
   echo "edastart.tcsh: ERROR"
@@ -45,6 +46,7 @@ else
 endif
 set EDA_CFG_DIR = ${rootdir}
 
+info " We were: $edastart"
 info " script  ${script}"
 info " rootdir ${rootdir}"
 

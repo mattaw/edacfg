@@ -3,6 +3,7 @@
 #  Based on the work by Dr. Mark Johnson, Purdue University
 #    thoughts - improve the error printout to put info and errors onto stderr.
 #               also when we error out it would be good to capture info_msg and error_msg
+# Copyright Mark Johnson and Matthew Swabey matthew@swabey.org.
 
 # Startup things
 if [[ $EUID -eq 0 ]]; then
@@ -84,9 +85,14 @@ function process_settings_file () {
 #
 ##
 
-# Find out where we are
-EDA_CFG_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Find out where we are and how we were run.
+[ "${0}" = "${BASH_SOURCE[0]}" ] && edastart="executed" || edastart="sourced"
+info "We were: $edastart"
+
+EDA_CFG_DIR="$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")"
 script="$( basename "${BASH_SOURCE[0]}" )"
+info "script  $script"
+info "rootdir $EDA_CFG_DIR"
 
 if [ "$script" == "edastart.bash" ]; then
   error "Do not source or execute edastart.bash directly."
@@ -94,8 +100,6 @@ if [ "$script" == "edastart.bash" ]; then
   return 10
 fi
 
-#Find out if we are sourced or executed
-[ "${0}" = "${BASH_SOURCE[0]}" ] && edastart="executed" || edastart="sourced"
 
 # Find and set file to full path of global_settings
 if [ -n "${EDA_CFG_SETTINGS}" ]; then

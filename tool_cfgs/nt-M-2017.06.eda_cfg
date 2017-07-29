@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Nanotime M-2017.06
+# Documentation: ntdoc <cr>
+NAME nanotime
+VERSION M-2017.06
+DESC Synopsys Nanotime
+ENV TOOLSET nt-M-2017.06
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV NANOTIME ${EDA_CFG_ROOT}/synopsys/nt-M-2017.06
+APPENDIF PATH ${NANOTIME}/bin
+ALIAS ntdoc firefox ${NANOTIME}/doc/nt/html/nanotime_doc/ntug.html

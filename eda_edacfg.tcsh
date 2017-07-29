@@ -16,6 +16,9 @@ if ( "$edastart" != "sourced" ) then
   exit 10000
 endif
 
+info  "eda_edacfg.tcsh: INFO"
+error "eda_edacfg.tcsh: ERROR"
+
 foreach tool ($*)
 
   set file = "${EDA_CFG_FILES}/$tool.${EDA_CFG_FILE_EXT}"

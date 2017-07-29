@@ -1,0 +1,11 @@
+# Tool config file for Synopsys HSPICE M-2017.03-SP1
+# Documentation: type hspdocs <cr>
+NAME HSPICE
+VERSION M-2016.12-SP4
+DESC Synopsys HSPICE
+ENV TOOLSET HSPICE-M-2017.03-SP1
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV HSP_HOME ${EDA_CFG_ROOT}/synopsys/hspice-M-2017.03-SP1
+APPENDIF PATH ${HSP_HOME}/hspice/bin
+APPENDIF PATH ${HSP_HOME}/x86_64/veriloga_utils/veriloga/include
+ALIAS hspdocs firefox ${HSP_HOME}/hspice/docs_help/index.htm

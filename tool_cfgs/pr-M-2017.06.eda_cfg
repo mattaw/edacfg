@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Primerail M-2017.06
+# Documentation: prdoc <cr>
+NAME primerail
+VERSION M-2017.06
+DESC Synopsys Primerail
+ENV TOOLSET pr-M-2017.06
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV SYNOPSYS_PR ${EDA_CFG_ROOT}/synopsys/pr-M-2017.06
+APPENDIF PATH ${SYNOPSYS_PR}/bin
+ALIAS prdoc firefox ${SYNOPSYS_PR}/doc/pr/pdf
