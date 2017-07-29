@@ -37,35 +37,6 @@ function prependif () {
   fi
 }
 
-function process_settings_file () {
-  info "File \"${1}\"."
-  while IFS= read line
-  do
-    read -r -a tokens <<< "${line}"
-
-    case "${tokens[0]}" in
-      \#*)
-        ;;
-      ENV)
-        eval env="${tokens[2]}"
-        export ${tokens[1]}="$env"
-        info "ENV: exported ${tokens[1]}=$env"
-        ;;
-      UMASK)
-        umask ${tokens[1]}
-        info "UMASK ${tokens[1]}"
-        ;;
-      *)
-        error "File \"${1}\"."
-        error "Unknown token \"${tokens[0]}\"."
-        return 10
-        ;;
-    esac
-  done <"${1}"
-
-  return 0
-}
-
 function process_tool_file () {
   #First read the file to check that there is only one NAME. Prevent destructive alterations.
   info "File \"${1}\"."
@@ -159,7 +130,7 @@ function process_tool_file () {
 ##
 
 # Loop over tools passed as arguments
-for tool in "$@"; do
+for tool in $@; do
   file="${EDA_CFG_FILES}/${tool}.${EDA_CFG_FILE_EXT}"
   if [ -s "${file}" ]; then
     process_tool_file "${file}"
