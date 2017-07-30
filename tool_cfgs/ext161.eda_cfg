@@ -1,0 +1,11 @@
+# Cadence EXT Quantus QRC Extraction 16.1
+# Online documentation command: extdoc
+NAME ext
+VERSION 16.1
+DESC Cadence EXT Quantus QRC Extraction 16.1
+ENV QRC_HOME ${EDA_CFG_ROOT}/cadence/EXT161
+ENV CDS_INIT_DIR ${QRC_HOME}
+APPENDIF PATH ${QRC_HOME}/tools/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ENV CDS_AUTO_64BIT ALL
+ALIAS extdoc cdnshelp -hierarchy ${QRC_HOME}/doc/xmlreg/library.lbr
