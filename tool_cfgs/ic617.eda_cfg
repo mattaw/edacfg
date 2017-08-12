@@ -1,6 +1,6 @@
 # Cadence Virtuoso 6.1.7
 # Online documentation command: icdoc
-NAME ic617
+NAME IC617
 ENV CDS_IC ${EDA_CFG_ROOT}/cadence/IC617
 ENV CDS_INIT_DIR ${CDS_IC}
 APPENDIF PATH ${CDS_IC}/tools/bin

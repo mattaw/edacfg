@@ -1,6 +1,6 @@
 # Tool config file for Synopsys Primerail M-2017.06
 # Documentation: prdoc <cr>
-NAME primerail
+NAME PRIMERAIL
 VERSION M-2017.06
 DESC Synopsys Primerail
 ENV TOOLSET pr-M-2017.06

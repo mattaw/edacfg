@@ -1,6 +1,6 @@
 # Tool config file for Synopsys Nanotime M-2017.06
 # Documentation: ntdoc <cr>
-NAME nanotime
+NAME NANOTIME
 VERSION M-2017.06
 DESC Synopsys Nanotime
 ENV TOOLSET nt-M-2017.06

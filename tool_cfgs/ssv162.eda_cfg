@@ -1,6 +1,6 @@
 # Cadence SSV Tempus Timing and Voltus Power 16.2
 # Online documentation command: ssvdoc
-NAME ssv
+NAME SSV
 VERSION 16.2
 DESC Cadence SSV Tempus Timing and Voltus Power 16.2
 APPENDIF PATH ${EDA_CFG_ROOT}/cadence/SSV162/tools/bin

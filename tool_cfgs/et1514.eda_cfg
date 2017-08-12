@@ -1,6 +1,6 @@
 # Cadence Encounter Timing System
 # Online documentation command: etdoc
-NAME et
+NAME ET
 ENV CDS_ET ${EDA_CFG_ROOT}cadence/ET1514
 ENV CDS_INIT_DIR ${CDS_ET}
 APPENDIF PATH ${CDS_ET}/tools/bin

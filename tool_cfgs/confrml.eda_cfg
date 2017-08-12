@@ -1,6 +1,6 @@
 # Cadence CONFRML Conformal Equivalence Checker 16.1
 # Online documentation command: confrmldoc
-NAME confrml
+NAME CONFRML
 VERSION 16.1
 DESC Cadence CONFRML Conformal Equivalence Checker 16.1
 ENV EDA_CFG_CDS_CONFRML ${EDA_CFG_ROOT}/cadence/CONFRML161

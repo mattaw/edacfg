@@ -1,6 +1,6 @@
 # Tool config file for Mentor Graphics Calibre 2017.2_28.22
 # For documentation, type caldoc
-NAME calibre
+NAME CALIBRE
 VERSION 2017.2_28.22
 DESC Mentor Graphics Calibre
 ENV TOOLSET cal2017.2_28.22

@@ -1,6 +1,6 @@
 # Cadence EXT Quantus QRC Extraction 16.1
 # Online documentation command: extdoc
-NAME ext
+NAME EXT
 VERSION 16.1
 DESC Cadence EXT Quantus QRC Extraction 16.1
 ENV QRC_HOME ${EDA_CFG_ROOT}/cadence/EXT161

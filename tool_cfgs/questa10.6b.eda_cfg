@@ -1,5 +1,5 @@
 # Tool config file for Mentor Graphics Questasim and Modelsim 10.3b
-NAME questa
+NAME QUESTA
 VERSION 10.6b
 DESC Mentor Graphics Modelsim/Questa 10.6b
 ENV TOOLSET questav10.6b

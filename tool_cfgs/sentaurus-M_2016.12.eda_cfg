@@ -1,5 +1,5 @@
 # Tool config file for Synopsys Sentaurus 2016.12
-NAME sentaurus
+NAME SENTAURUS
 VERSION M-2016.12-SP2
 DESC Synopsys Sentaurus
 ENV TOOLSET sentaurus-M_2016.12-SP2_

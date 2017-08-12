@@ -1,6 +1,6 @@
 # Tool config file for Mentor Graphics CatapultC 2017.2
 # For documentation see help menu inside "catapult" application
-NAME catapult
+NAME CATAPULT
 VERSION 2017.2
 DESC Mentor Graphics CatapultC
 ENV TOOLSET cal2017.2

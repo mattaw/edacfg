@@ -1,6 +1,6 @@
 # Synopsys Milky Way
 # Documentation: mwdocs <cr>
-NAME milkyway
+NAME MILKYWAY
 VERSION M-2016.12-SP4
 DESC Synopsys Milky Way
 ENV SYNOPSYS_MW ${EDA_CFG_ROOT}/synopsys/mw-M-2016.12-SP4

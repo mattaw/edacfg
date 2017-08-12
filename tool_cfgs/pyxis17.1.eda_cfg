@@ -1,6 +1,6 @@
 # Tool config file for Mentor Graphics Pyxis
 # For documentation, type pydocs
-NAME pyxis
+NAME PYXIS
 VERSION 17.1
 DESC Mentor Graphics Pyxis
 ENV TOOLSET pyxis17.1

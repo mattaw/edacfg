@@ -1,6 +1,6 @@
 # Cadence Multi-mode simulation Spectre 1.5.1
 # Online documentation command: mmsimdoc
-NAME mmsim
+NAME MMSIM
 ENV MMSIM ${EDA_CFG_ROOT}cadence/MMSIM151
 ENV CDS_INIT_DIR ${MMSIM}
 APPENDIF PATH ${MMSIM}/tools/bin

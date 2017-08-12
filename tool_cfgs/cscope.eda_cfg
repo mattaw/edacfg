@@ -1,5 +1,5 @@
 # Synopsys Cosmoscope M-2017.06
-NAME cscope
+NAME CSCOPE
 VERSION M-2017.06
 DESC Synopsys Cosmoscope
 ENV CSCOPE ${EDA_CFG_ROOT}/synopsys/cscope-M-2017.06

@@ -1,5 +1,5 @@
 # Tool config file for Synopsys Formality 2016.12
-NAME formality
+NAME FORMALITY
 VERSION M-2016.12-SP4
 DESC Synopsys Formality
 ENV TOOLSET formality-M_2016.12-SP4_

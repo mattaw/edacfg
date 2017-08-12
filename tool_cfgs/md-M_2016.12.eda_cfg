@@ -1,6 +1,6 @@
 # Tool config file for Synopsys Medici M_2016.12
 # Documentation: type mddoc <cr>
-NAME Medici
+NAME MEDICI
 VERSION M-2016.12
 DESC Synopsys Medici
 ENV TOOLSET md-M_2016.12
