@@ -2,4 +2,5 @@
 ENV EDA_CFG_ROOT /package/eda
 ENV EDA_CFG_FILE_EXT "eda_cfg"
 ENV EDA_CFG_FILES ${EDA_CFG_ROOT}/setup/tool_cfgs
+ENV MANPATH ":" #MANPATH is funny. The : at one end makes it search system mans
 UMASK 077

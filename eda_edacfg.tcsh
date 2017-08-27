@@ -42,7 +42,6 @@ foreach tool ($*)
               goto SKIP
             endif
           else # create path if doesn't exist
-            #setenv EDA_CFG_ACTIVE_TOOLS $tokens[2]
             set name=$tokens[2]
           endif
           info "NAME: $tokens[2]"

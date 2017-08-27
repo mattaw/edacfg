@@ -23,11 +23,11 @@ if ( $?EDA_CFG_DEBUG ) then
 endif
 
 # Error support
-set error_msg = "edacfg: ERROR"
+set error_msg = "edastart: ERROR"
 alias error 'eval set error_msg = \"${error_msg}\\n  \!*\"'
 
 # Info support
-set info_msg = "edacfg: INFO"
+set info_msg = "edastart: INFO"
 alias info 'eval set info_msg = \"${info_msg}\\n  \!*\"'
 
 # Find out where we are and if we were sourced or run
