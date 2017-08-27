@@ -1,0 +1,10 @@
+# Tool config file for Synopsys VCS-MX L-2016.06
+# Documentation: type vcsdoc <cr>
+NAME VCS
+VERSION L-2016.06
+DESC Synopsys VCS
+ENV TOOLSET vcs-mx-L-2016.06
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV VCS_HOME ${EDA_CFG_ROOT}/synopsys/vcs-mx-L-2016.06
+APPENDIF PATH ${VCS_HOME}/bin
+ALIAS vcsdoc firefox ${VCS_HOME}/doc

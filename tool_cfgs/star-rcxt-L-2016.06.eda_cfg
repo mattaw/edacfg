@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Hercules Star RC extraction star-rcxt-M-2017.06
+# Documentation: stardoc <cr>
+NAME STAR-RCXT
+VERSION M-2017.06
+DESC Synopsys Star-RCXT
+ENV TOOLSET starrc-M-2017.06
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV STARRCXT ${EDA_CFG_ROOT}/synopsys/starrc-M-2017.06
+APPENDIF PATH ${STARRCXT}/bin
+ALIAS stardoc firefox ${STARRCXT}/doc/starrc

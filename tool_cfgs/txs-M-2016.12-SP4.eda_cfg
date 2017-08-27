@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Tetramax txs-M-2016.12-SP4
+# Documentation: type txdoc <cr>
+NAME TETRAMAX
+VERSION M-2016.12-SP4
+DESC Synopsys Tetramax
+ENV TOOLSET txs-M_2016.12-SP4
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV TETRAMAX ${EDA_CFG_ROOT}/synopsys/txs-M-2016.12-SP4
+APPENDIF PATH ${TETRAMAX}/bin
+ALIAS txdoc firefox ${TETRAMAX}/doc

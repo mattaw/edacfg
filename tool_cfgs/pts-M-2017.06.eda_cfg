@@ -1,0 +1,11 @@
+# Tool config file for Synopsys PrimeTime M-2017.06
+# Documentation: ptdoc <cr>
+NAME PRIMETIME
+VERSION M-2017.06
+DESC Synopsys Primetime
+ENV TOOLSET pts-M-2017.06
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV PRIMETIME ${EDA_CFG_ROOT}/synopsys/pts-M-2017.06
+APPENDIF PATH ${PRIMETIME}/bin
+APPENDIF MANPATH ${PRIMETIME}/doc/pts/man
+ALIAS ptdoc firefox ${PRIMETIME}/doc/pt/

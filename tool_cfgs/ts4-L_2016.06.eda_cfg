@@ -1,0 +1,12 @@
+# Tool config file for Synopsys Tsuprem4 and Taurus Process L_2016.03
+# Documentation: type ts4doc <cr>
+NAME TSUPREM
+VERSION L_2016.03
+DESC Synopsys Tsuprem and Taurus Process
+ENV TOOLSET ts4-L_2016.03
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV TSUPREM ${EDA_CFG_ROOT}/synopsys/ts4-L_2016.03/taurus-tsuprem4_2016.03.0
+APPENDIF PATH ${TSUPREM}/bin
+APPENDIF LD_LIBRARY_PATH ${TSUPREM}/linux/lib
+APPENDIF LD_LIBRARY_PATH ${TSUPREM}/linux/s4lib
+ALIAS ts4doc firefox ${TSUPREM}/manual_pdf
