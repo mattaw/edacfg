@@ -1,0 +1,9 @@
+# Tool config file for Synopsys CustomWaveview O-2018.09
+# Documentation: run wv and click on "?" icon
+NAME CustomWaveview
+VERSION O-2018.09
+DESC Synopsys CustomWaveview
+ENV TOOLSET CustomWaveview-0-2018.09
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV CWV_HOME ${EDA_CFG_ROOT}/synopsys/CustomWaveview-O-2018.09
+APPENDIF PATH ${CWV_HOME}/bin

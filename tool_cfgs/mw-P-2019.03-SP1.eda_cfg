@@ -1,0 +1,10 @@
+# Synopsys Milky Way
+# Documentation: mwdocs <cr>
+NAME MILKYWAY
+VERSION P-2019.03-SP1
+DESC Synopsys Milky Way
+ENV SYNOPSYS_MW ${EDA_CFG_ROOT}/synopsys/mw-P-2019.03-SP1
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+APPENDIF PATH ${SYNOPSYS_MW}/bin/AMD.64
+APPENDIF MANPATH ${SYNOPSYS_MW}/doc/mwm/man
+ALIAS mwdocs xdg-open ${SYNOPSYS_MW}/doc/pdf

@@ -1,0 +1,10 @@
+# Cadence Virtuoso 6.1.7.7
+# Online documentation command: icdoc
+NAME IC617.7
+ENV CDS_IC ${EDA_CFG_ROOT}/cadence/IC617.7
+ENV CDS_INIT_DIR ${CDS_IC}
+APPENDIF PATH ${CDS_IC}/tools/bin
+APPENDIF PATH ${CDS_IC}/tools/dfII/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ENV CDS_AUTO_64BIT ALL
+ALIAS icdoc cdnshelp -hierarchy ${EDA_CFG_ROOT}/cadence/IC617.7/doc/xmlreg/library.lbr

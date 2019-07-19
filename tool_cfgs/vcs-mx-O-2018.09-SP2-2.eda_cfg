@@ -1,0 +1,10 @@
+# Tool config file for Synopsys VCS-MX O-2018.09-SP2-2
+# Documentation: type vcsdoc <cr>
+NAME VCS
+VERSION O-2018.09-SP2-2
+DESC Synopsys VCS
+ENV TOOLSET vcs-mx-O-2018.09-SP2-2
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV VCS_HOME ${EDA_CFG_ROOT}/synopsys/vcs-mx-O-2018.09-SP2-2
+APPENDIF PATH ${VCS_HOME}/bin
+ALIAS vcsdoc xdg-open ${VCS_HOME}/doc/UserGuide/smartsearch/doc/html/index.htm

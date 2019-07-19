@@ -1,0 +1,10 @@
+# Tool config file for Synopsys CutomSim O-2018.09-SP5
+# Documentation: type hspdocs <cr>
+NAME CustomSim
+VERSION O-2018.09-SP5
+DESC Synopsys CustomSim
+ENV TOOLSET XA-O-2018.09-SP5
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV XA_HOME ${EDA_CFG_ROOT}/synopsys/xa-O-2018.09-SP5
+APPENDIF PATH ${XA_HOME}/bin
+ALIAS xadoc xa -webhelp

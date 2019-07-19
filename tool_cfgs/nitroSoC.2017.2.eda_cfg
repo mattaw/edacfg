@@ -1,0 +1,10 @@
+# Tool config file for Mentor Graphics NitroSoC
+# For documentation, type nitrodoc
+NAME NITROSOC
+VERSION 2017.2
+DESC Mentor Graphics NitroSoC
+ENV TOOLSET nitrosoc2017.2
+APPENDIF MGLS_LICENSE_FILE 1719@marina.ecn.purdue.edu
+ENV MGC_HOME ${EDA_CFG_ROOT}/mg/nitroSoC-2017.2.R1/sierraPack-2017.2.R1/sierra
+APPENDIF PATH ${MGC_HOME}/bin
+ALIAS nitrodoc firefox ${MGC_HOME}/doc/docs/index.html

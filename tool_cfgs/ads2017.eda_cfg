@@ -1,0 +1,10 @@
+# Tool config file for Agilent Design System
+# Documentation: help menu within ads application
+NAME Agilent Design System
+VERSION 2017.2
+DESC Agilent Design System
+ENV TOOLSET ADS2017.2
+ENV ADS_LICENSE_FILE 1710@marina.ecn.purdue.edu
+APPENDIF LM_LICENSE_FILE 1710@marina.ecn.purdue.edu
+ENV HPEESOF_DIR ${EDA_CFG_ROOT}/agilent/ADS2017.2
+APPENDIF PATH ${HPEESOF_DIR}/bin

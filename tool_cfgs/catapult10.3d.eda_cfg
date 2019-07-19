@@ -1,0 +1,11 @@
+# Tool config file for Mentor Graphics Catapult 10.3d
+# For documentation see help menu inside "catapult" application
+NAME CATAPULT
+VERSION 10.3d
+DESC Mentor Graphics Catapult 10.3d
+ENV TOOLSET cal10.3d
+APPENDIF MGLS_LICENSE_FILE 1719@marina.ecn.purdue.edu
+APPENDIF LM_LICENSE_FILE 1719@marina.ecn.purdue.edu
+ENV MGC_HOME ${EDA_CFG_ROOT}/mg/Catapult_10.3d/Mgc_home
+APPENDIF PATH ${MGC_HOME}/bin
+ALIAS caldoc firefox file:///${MGC_HOME}/docs/infohubs/index.html

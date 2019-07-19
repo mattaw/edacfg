@@ -1,0 +1,11 @@
+# Tool config file for Synopsys HSPICE O-2018.09-SP2
+# Documentation: type hspdocs <cr>
+NAME HSPICE
+VERSION O-2018.09-SP2
+DESC Synopsys HSPICE
+ENV TOOLSET HSPICE-O-2018.09-SP2
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV HSP_HOME ${EDA_CFG_ROOT}/synopsys/hspice-O-2018.09-SP2
+APPENDIF PATH ${HSP_HOME}/hspice/bin
+APPENDIF PATH ${HSP_HOME}/x86_64/veriloga_utils/veriloga/include
+ALIAS hspdocs xdg-open ${HSP_HOME}/hspice/docs_help/index.htm

@@ -1,0 +1,12 @@
+# Tool config file for Synopsys Tetramax txs-P-2019.03-SP1
+# Documentation: type txdoc <cr>
+NAME TETRAMAX
+VERSION P-2019.03-SP1
+DESC Synopsys Tetramax
+ENV TOOLSET txs-M_2016.12-SP4
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV TETRAMAX ${EDA_CFG_ROOT}/synopsys/txs-P-2019.03-SP1
+APPENDIF PATH ${TETRAMAX}/bin
+APPENDIF MANPATH ${TETRAMAX}/doc/snps_gui/man
+APPENDIF MANPATH ${TETRAMAX}/doc/snps_tcl/man
+ALIAS txdoc xdg-open ${TETRAMAX}/doc/pdf

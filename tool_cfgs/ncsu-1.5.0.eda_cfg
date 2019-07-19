@@ -21,4 +21,5 @@ APPENDIF MANPATH ${IC}/tools/man
 APPENDIF LD_LIBRARY_PATH ${IC}/tools/lib
 ENV SKIP_CDS_DIALOG 1
 ALIAS ic5141doc ${IC}/../IC616/bin/cdnshelp -hierarchy ${IC}/doc/xmlreg/library.lbr
-ALIAS icfb icfb -nosplash
+#mcj 5/22/2018 disabled icfb alias. For some reason was causing icfb to crash on startup
+#ALIAS icfb icfb -nosplash

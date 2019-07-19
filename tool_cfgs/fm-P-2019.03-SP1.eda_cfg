@@ -1,0 +1,9 @@
+# Tool config file for Synopsys Formality 2016.12
+NAME FORMALITY
+VERSION P-2019.03-SP1
+DESC Synopsys Formality
+ENV TOOLSET formality-P_2019.03-SP1_
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV FMROOT ${EDA_CFG_ROOT}/synopsys/fm-P-2019.03-SP1
+APPENDIF PATH ${FMROOT}/bin
+ALIAS fmdocs xdg-open ${FMROOT}/doc/fm/pdf/

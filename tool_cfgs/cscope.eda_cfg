@@ -1,8 +1,1 @@
-# Synopsys Cosmoscope M-2017.06
-NAME CSCOPE
-VERSION M-2017.06
-DESC Synopsys Cosmoscope
-ENV CSCOPE ${EDA_CFG_ROOT}/synopsys/cscope-M-2017.06
-APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
-APPENDIF PATH ${CSCOPE}/ai_bin
-ALIAS csdoc firefox ${CSCOPE}/doc/webworks_docs/cosmosscope/index.htm
+cscope-N-2017.12.eda_cfg

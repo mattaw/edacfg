@@ -1,0 +1,14 @@
+# Synopsys Design Compiler RTL Synthesis
+NAME SYN
+VERSION P-2019.03-SP1
+DESC Synopsys Design Compiler RTL Synthesis version P-2019.03-SP1
+ENV SYNOPSYS ${EDA_CFG_ROOT}/synopsys/syn-P-2019.03-SP1
+ENV SYNTHESIS ${EDA_CFG_ROOT}/synopsys/syn-P-2019.03-SP1
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+APPENDIF PATH ${SYNOPSYS}/bin
+APPENDIF MANPATH ${SYNOPSYS}/doc/icc/man
+APPENDIF MANPATH ${SYNOPSYS}/doc/snps_gui/man
+APPENDIF MANPATH ${SYNOPSYS}/doc/snps_tcl/man
+APPENDIF MANPATH ${SYNOPSYS}/doc/syn/man
+# Must download these pdfs manually from solvnet
+ALIAS dcdoc xdg-open ${SYNOPSYS}/doc/pdf

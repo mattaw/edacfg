@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Verdi
+# Documentation: type vdoc <cr>
+NAME Verdi 
+VERSION M-2017.03-1
+DESC Synopsys Verdi
+ENV TOOLSET Verdi_M-2017.03-1
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV NOVAS_HOME ${EDA_CFG_ROOT}/synopsys/Verdi_M-2017.03-1
+APPENDIF PATH ${NOVAS_HOME}/bin
+ALIAS vdoc firefox ${NOVAS_HOME}/doc

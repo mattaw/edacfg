@@ -1,0 +1,11 @@
+# Cadence Multi-mode simulation Spectre 1.7.1
+# Online documentation command: mmsimdoc
+NAME SPECTRE
+ENV SPECTRE ${EDA_CFG_ROOT}/cadence/SPECTRE171
+ENV CDS_INIT_DIR ${SPECTRE}
+APPENDIF PATH ${SPECTRE}/tools/bin
+APPENDIF PATH ${SPECTRE}/tools/dfII/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ENV CDS_AUTO_64BIT ALL
+ALIAS mmsimdoc cdnshelp -hierarchy ${SPECTRE}/doc/xmlreg/library.lbr
+ALIAS spectredoc cdnshelp -hierarchy ${SPECTRE}/doc/xmlreg/library.lbr

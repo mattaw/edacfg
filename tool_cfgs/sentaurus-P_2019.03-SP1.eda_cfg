@@ -1,0 +1,9 @@
+# Tool config file for Synopsys Sentaurus 2016.12
+NAME SENTAURUS
+VERSION P-2019.03-SP1
+DESC Synopsys Sentaurus
+ENV TOOLSET sentaurus-P_2019.03-SP1_
+ENV STDB ${HOME}
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV STROOT ${EDA_CFG_ROOT}/synopsys/sentaurus-P_2019.03-SP1
+APPENDIF PATH ${STROOT}/bin

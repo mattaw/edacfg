@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Hercules Star RC extraction star-rcxt-M-2018.06
+# Documentation: stardoc <cr>
+NAME STAR-RCXT
+VERSION P-2019.03-SP1
+DESC Synopsys Star-RCXT
+ENV TOOLSET starrc-P-2019.03-SP1_
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV STARRCXT ${EDA_CFG_ROOT}/synopsys/starrc-P-2019.03-SP1
+APPENDIF PATH ${STARRCXT}/bin
+ALIAS stardoc xdg-open ${STARRCXT}/doc/pdf

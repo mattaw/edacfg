@@ -1,0 +1,9 @@
+# Tool config file for Mentor Graphics - Tanner Ledit
+# For documentation, see help menu in ledit
+NAME Tanner Ledit
+VERSION 2016 2u9
+DESC Mentor Graphics Tanner Ledit
+ENV TOOLSET tanner2016
+APPENDIF MGLS_LICENSE_FILE 1719@marina.ecn.purdue.edu
+ENV TANNER_PATH ${EDA_CFG_ROOT}/mg/tanner
+APPENDIF PATH ${TANNER_PATH}/bin

@@ -1,0 +1,22 @@
+# NCSU Design kit 1.6.0 for Cadence Virtuoso 6.1.7
+# Online documentation for Virtuoso: ic5141doc
+NAME NCSU
+VERSION 1.6.0
+DESC NCSU Design kit 1.6.0 for Cadence Virtuoso 6.1.7
+ENV CDS ${EDA_CFG_ROOT}/cadence
+ENV IC ${CDS}/IC617
+ENV CDSHOME ${IC}
+ENV CDS_SITE ${EDA_CFG_ROOT}/cells/ncsu-cdk-1.6.0.beta
+ENV CDK_DIR ${EDA_CFG_ROOT}/cells/ncsu-cdk-1.6.0.beta
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ENV CDS_Netlisting_Mode Analog
+APPENDIF PATH ${IC}/tools/bin
+APPENDIF PATH ${IC}/tools/dfII/bin
+APPENDIF PATH ${IC}/tools/concice/bin
+PREPENDIF PATH ${CDS}/bin
+APPENDIF MANPATH ${IC}/share/man
+APPENDIF MANPATH ${IC}/tools/man
+APPENDIF LD_LIBRARY_PATH ${IC}/tools/lib
+ENV SKIP_CDS_DIALOG 1
+ALIAS icdoc ${IC}/bin/cdnshelp -hierarchy ${IC}/doc/xmlreg/library.lbr
+ALIAS icfb virtuoso -nosplash

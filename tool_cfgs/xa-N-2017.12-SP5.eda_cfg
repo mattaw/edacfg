@@ -1,0 +1,10 @@
+# Tool config file for Synopsys CutomSim N-2017.12-SP5
+# Documentation: type hspdocs <cr>
+NAME CustomSim
+VERSION N-2017.12-SP5
+DESC Synopsys CustomSim
+ENV TOOLSET XA-N-2017.12-SP5
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV XA_HOME ${EDA_CFG_ROOT}/synopsys/xa-N-2017.12-SP5
+APPENDIF PATH ${XA_HOME}/bin
+ALIAS xadoc firefox ${XA_HOME}/doc/webworks/index.htm

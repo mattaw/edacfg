@@ -1,7 +1,7 @@
 # Cadence Incisiv simulator
 # Online documentation command: incisivdoc
 NAME INCISIV
-ENV CDS_INCISIV ${EDA_CFG_ROOT}cadence/INCISIVE152
+ENV CDS_INCISIV ${EDA_CFG_ROOT}/cadence/INCISIVE152
 ENV CDS_INIT_DIR ${CDS_INCISIV}
 APPENDIF PATH ${CDS_INCISIV}/tools/bin
 APPENDIF PATH ${CDS_INCISIV}/bin

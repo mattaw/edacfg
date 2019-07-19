@@ -1,0 +1,9 @@
+# Xilinx Vivado 2018.3
+# See documentation in vivado application
+NAME VIVADO
+VERSION 2018.3
+DESC Xilinx Vivado 2018.3
+ENV VIVADO_ROOTDIR ${EDA_CFG_ROOT}/xilinx/Vivado/2018.3
+APPENDIF LM_LICENSE_FILE 2100@marina.ecn.purdue.edu
+APPENDIF PATH ${VIVADO_ROOTDIR}/bin
+APPENDIF LD_LIBRARY_PATH ${VIVADO_ROOTDIR}/lib/lnx64.o

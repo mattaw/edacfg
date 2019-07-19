@@ -1,0 +1,9 @@
+# Tool config file for Synopsys Library Compiler O-2018.06
+NAME LibraryCompiler
+VERSION O-2018.06
+DESC Synopsys Library compiler
+ENV TOOLSET formality-M_2016.12-SP4_
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV LCROOT ${EDA_CFG_ROOT}/synopsys/lc-O-2018.06
+APPENDIF PATH ${LCROOT}/bin
+ALIAS lcdocs firefox ${LCROOT}/doc/pdf/

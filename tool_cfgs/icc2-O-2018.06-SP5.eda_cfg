@@ -1,0 +1,13 @@
+# Synopsys IC Compiler 2 P&R
+NAME SYNOPSYS_ICC2
+VERSION O-2018.06-SP5
+DESC Synopsys IC Compiler II Place and Route version O-2018.06-SP5
+ENV SYNOPSYS_ICC2 ${EDA_CFG_ROOT}/synopsys/icc2-O-2018.06-SP5
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+APPENDIF PATH ${SYNOPSYS_ICC2}/bin
+APPENDIF MANPATH ${SYNOPSYS_ICC2}/doc/ICC2/man
+APPENDIF MANPATH ${SYNOPSYS_ICC2}/doc/snps_gui/man
+APPENDIF MANPATH ${SYNOPSYS_ICC2}/doc/snps_tcl/man
+ALIAS icc2doc xdg-open ${SYNOPSYS_ICC2}/doc/pdf
+# Must download these pdfs manually from solvnet
+ALIAS icc2pdf xdg-open ${SYNOPSYS_ICC2}/doc/pdf

@@ -1,0 +1,10 @@
+# Tool config file for Synopsys Verdi
+# Documentation: type vdoc <cr>
+NAME Verdi 
+VERSION O-2018.09-SP2
+DESC Synopsys Verdi
+ENV TOOLSET Verdi_O-2018.09-SP2
+APPENDIF LM_LICENSE_FILE 1718@marina.ecn.purdue.edu
+ENV NOVAS_HOME ${EDA_CFG_ROOT}/synopsys/verdi-O-2018.09-SP2
+APPENDIF PATH ${NOVAS_HOME}/bin
+ALIAS vdoc xdg-open ${NOVAS_HOME}/doc

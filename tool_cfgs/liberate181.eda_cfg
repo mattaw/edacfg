@@ -1,0 +1,8 @@
+# Cadence Liberate for library development
+# Online documentation command: libdoc
+NAME LIBERATE181
+ENV CDS_LIBERATE ${EDA_CFG_ROOT}/cadence/LIBERATE181
+ENV CDS_INIT_DIR ${CDS_LIBERATE}
+APPENDIF PATH ${CDS_LIBERATE}/tools/bin
+APPENDIF CDS_LIC_FILE 1720@marina.ecn.purdue.edu
+ALIAS libdoc cdnshelp -hierarchy ${EDA_CFG_ROOT}/cadence/LIBERATE181/doc/xmlreg/library.lbr
